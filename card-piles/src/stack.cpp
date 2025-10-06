@@ -12,3 +12,9 @@ void Stats::add(int length) {
     counts[length]++;
 }
 
+std::map<int, double> Stats::percentages() const {
+    if (lengths.empty()) {
+        return {};
+    }
+  
+}
