@@ -20,5 +20,3 @@ public:
 };
 
 void process_stacks(Deck& deck, int num_cards, Stats& stats);
-
-#endif
