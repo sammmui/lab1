@@ -6,27 +6,28 @@
 using namespace std;
 
 int main() {
-    int suits;
-    cout << "Enter number of suits: ";
-    cin >> suits;
-    if (cin.fail() || suits <= 0) {
-        cerr << "Error: Invalid number of suits (must be a positive integer)\n";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        return 1;
-    }
+    try {
+        int suits;
+        cout << "Enter number of suits: ";
+        cin >> suits;
+        if (cin.fail() || suits <= 0) {
+            cerr << "Error: Invalid number of suits (must be a positive integer)\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            return 1;
+        }
 
-    int num_cards;
-    cout << "Enter number of cards to deal: ";
-    cin >> num_cards;
-    if (cin.fail() || num_cards < 0) {
-        cerr << "Error: Invalid number of cards (must be a non-negative integer)\n";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        return 1;
-    }
+        int num_cards;
+        cout << "Enter number of cards to deal: ";
+        cin >> num_cards;
+        if (cin.fail() || num_cards < 0) {
+            cerr << "Error: Invalid number of cards (must be a non-negative integer)\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            return 1;
+        }
 
-    Deck deck(suits, 13);
+        Deck deck(suits, 13);
         Stats stats;
         process_stacks(deck, num_cards, stats);
 
@@ -52,9 +53,11 @@ int main() {
             cout << ranks << "\t" << exp_stats.average() << "\t" << exp_stats.median() << "\n";
         }
 
-    } catch (const exception& e) {
+    }
+    catch (const exception& e) {
         cerr << "Error: " << e.what() << "\n";
         return 1;
     }
 
     return 0;
+}
