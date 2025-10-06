@@ -1,18 +1,24 @@
 #pragma once
-#include <vector>
+
 #include <map>
-#include <string> 
-#include <iostream>
+#include <vector>
+
+class Deck;
+class Card;
 
 class Stats {
-    private:
-    std:vector<int> pile_lenghts;
+private:
+    std::vector<int> lengths;
+    std::map<int, size_t> counts;
 
-    public:
-    void addPile(int lenght);
-    double mean() const;
+public:
+    void add(int length);
+    std::map<int, double> percentages() const;
+    int most_frequent() const;
+    double average() const;
     double median() const;
-    int mode() const;
-    std:map<int, double> percentages() const;
-    void printReport() const;
 };
+
+void process_stacks(Deck& deck, int num_cards, Stats& stats);
+
+#endif
