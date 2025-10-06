@@ -32,5 +32,6 @@ public:
     // Отримати наступну карту
     Card operator()();
    // Перевірити, чи колода потребує перетасування
-    bool needsReshuffle() const;
+    bool needsReshuffle() const{ return currentIndex >= cards.size(); }
 };
+
