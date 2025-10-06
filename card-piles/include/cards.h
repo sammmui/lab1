@@ -5,12 +5,13 @@
 #include <string>
 
 class Card {
-    private:
-         int value;
-         int suit;
-    public:
-      Card(int v, int s) : value(v), suit(s) {}
-     std::string toString() const;
+private:
+    int value;
+    int suit;
+public:
+ Card() {}
+    Card(int v, int s) : value(v), suit(s) {}
+    std::string toString() const;
 
     auto operator<=>(const Card&) const = default;
 };
@@ -27,11 +28,9 @@ private:
     void shuffleDeck();
 
 public:
-    explicit Deck(int numSuits);
 
-    // Отримати наступну карту
+    explicit Deck(int numSuits, int numValues);
     Card operator()();
-   // Перевірити, чи колода потребує перетасування
     bool needsReshuffle() const;
 };
 

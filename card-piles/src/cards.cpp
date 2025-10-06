@@ -1,28 +1,30 @@
-#include <cards.h>
+#include "cards.h"
 #include <algorithm>
 #include <random>
 #include <sstream>
 
 std::string Card::toString() const {
-    static const std::string suitNames[] = {"♠", "♥", "♦", "♣"};
+    static const std::string suitNames[] = { "♠", "♥", "♦", "♣" };
     static const std::string valueNames[] =
     {
         "", "A", "2", "3", "4", "5", "6", "7",
         "8", "9", "10", "J", "Q", "K"
     };
- std::ostringstream out;
-    out << valueNames[value] << suitNames[suit];
+    std::ostringstream out;
+    out << (value <= 13 ? valueNames[value] : std::to_string(value)) << suitNames[suit];
     return out.str();
 }
-Deck::Deck(int numSuits)
+
+Deck::Deck(int numSuits, int numValues)
     : currentIndex(0),
-      numSuits(numSuits),
-      numValues(13),
-      rng(std::random_device{}())
+    numSuits(numSuits),
+    numValues(numValues),
+    rng(std::random_device{}())
 {
     initializeDeck();
     shuffleDeck();
 }
+
 void Deck::initializeDeck() {
     cards.clear();
     for (int s = 0; s < numSuits; ++s) {
@@ -31,6 +33,7 @@ void Deck::initializeDeck() {
         }
     }
 }
+
 void Deck::shuffleDeck() {
     std::shuffle(cards.begin(), cards.end(), rng);
     currentIndex = 0;
@@ -42,7 +45,7 @@ Card Deck::operator()() {
     }
     return cards[currentIndex++];
 }
+
 bool Deck::needsReshuffle() const {
     return currentIndex >= cards.size();
 };
-
