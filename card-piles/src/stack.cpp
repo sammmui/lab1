@@ -60,3 +60,27 @@ double Stats::median() const {
         return (sorted[n / 2 - 1] + sorted[n / 2]) / 2.0;
     }
 }
+
+void process_stacks(Deck& deck, int num_cards, Stats& stats) {
+    if (num_cards < 0) {
+        throw std::invalid_argument("Number of cards cannot be negative");
+    }
+    bool first = true;
+    int current = 0;
+    Card prev;
+    for (int i = 0; i < num_cards; ++i) {
+        Card c = deck();
+        if (first || (c <=> prev) >= 0) {
+            ++current;
+            prev = c;
+            first = false;
+        } else {
+            stats.add(current);
+            current = 1;
+            prev = c;
+        }
+    }
+    if (current > 0) {
+        stats.add(current);
+    }
+}
