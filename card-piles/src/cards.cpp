@@ -42,4 +42,7 @@ Card Deck::operator()() {
     }
     return cards[currentIndex++];
 }
+bool Deck::needsReshuffle() const {
+    return currentIndex >= cards.size();
+};
 
