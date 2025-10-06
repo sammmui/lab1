@@ -35,3 +35,28 @@ int Stats::most_frequent() const {
         });
     return max_it->first;
 }
+
+double Stats::average() const {
+    if (lengths.empty()) {
+        return 0.0;
+    }
+    double sum = 0.0;
+    for (int l : lengths) {
+        sum += l;
+    }
+    return sum / lengths.size();
+}
+
+double Stats::median() const {
+    if (lengths.empty()) {
+        return 0.0;
+    }
+    std::vector<int> sorted = lengths;
+    std::sort(sorted.begin(), sorted.end());
+    size_t n = sorted.size();
+    if (n % 2 == 1) {
+        return sorted[n / 2];
+    } else {
+        return (sorted[n / 2 - 1] + sorted[n / 2]) / 2.0;
+    }
+}
