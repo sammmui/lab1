@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 #include <string> 
+#include <iostream>
 
 class Stats {
     private:
