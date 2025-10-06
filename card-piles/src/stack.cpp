@@ -25,3 +25,13 @@ std::map<int, double> Stats::percentages() const {
     }
     return p;
 }
+
+int Stats::most_frequent() const {
+    if (counts.empty()) {
+        throw std::runtime_error("No stack data available");
+    }
+    auto max_it = std::max_element(counts.begin(), counts.end(), [](const auto& a, const auto& b) {
+         return a.second < b.second;
+        });
+    return max_it->first;
+}
