@@ -9,6 +9,7 @@ private:
     int value;
     int suit;
 public:
+ Card() {}
     Card(int v, int s) : value(v), suit(s) {}
     std::string toString() const;
 
@@ -32,5 +33,6 @@ public:
     Card operator()();
     bool needsReshuffle() const;
 };
+
 
 
