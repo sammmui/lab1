@@ -20,7 +20,7 @@ private:
     std::vector<Card> cards;
     size_t currentIndex;
     int numSuits;
-    int numValue;
+    int numValues;
     std::mt19937 rng;
 
     void initializeDeck();
@@ -34,4 +34,5 @@ public:
    // Перевірити, чи колода потребує перетасування
     bool needsReshuffle() const{ return currentIndex >= cards.size(); }
 };
+
 
