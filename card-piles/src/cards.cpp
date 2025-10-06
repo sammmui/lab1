@@ -23,4 +23,26 @@ Deck::Deck(int numSuits)
     initializeDeck();
     shuffleDeck();
 }
+void Deck::initializeDeck() {
+    cards.clear();
+    for (int s = 0; s < numSuits; ++s) {
+        for (int v = 1; v <= numValues; ++v) {
+            cards.emplace_back(v, s);
+        }
+    }
+}
+void Deck::shuffleDeck() {
+    std::shuffle(cards.begin(), cards.end(), rng);
+    currentIndex = 0;
+}
+
+Card Deck::operator()() {
+    if (needsReshuffle()) {
+        shuffleDeck();
+    }
+    return cards[currentIndex++];
+}
+bool Deck::needsReshuffle() const {
+    return currentIndex >= cards.size();
+};
 
