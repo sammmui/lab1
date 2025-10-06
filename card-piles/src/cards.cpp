@@ -14,4 +14,13 @@ std::string Card::toString() const {
     out << valueNames[value] << suitNames[suit];
     return out.str();
 }
+Deck::Deck(int numSuits)
+    : currentIndex(0),
+      numSuits(numSuits),
+      numValues(13),
+      rng(std::random_device{}())
+{
+    initializeDeck();
+    shuffleDeck();
+}
 
